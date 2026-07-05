@@ -13,7 +13,6 @@ import Conspiracies from "./pages/Conspiracies";
 import ClassifiedFiles from "./pages/ClassifiedFiles";
 import TerminalNav from "./components/TerminalNav";
 import PageTransition from "./components/PageTransition";
-import SignalIndicator from "./components/SignalIndicator";
 
 function Router() {
   const [location] = useLocation();
@@ -44,7 +43,6 @@ function App() {
           <div className="scanlines crt-flicker min-h-screen pb-6">
             <TerminalNav />
             <Router />
-            <SignalIndicator />
           </div>
         </TooltipProvider>
       </ThemeProvider>

@@ -176,20 +176,20 @@ export default function AgencyDossier() {
   return (
     <div className="min-h-screen pt-20 pb-16">
       {/* Agency navigation tabs */}
-      <div className="border-b border-[var(--steel)]/20 px-4 md:px-8 pt-2">
-        <div className="flex gap-0 overflow-x-auto">
+      <div className="border-b border-[var(--steel)]/30 px-4 md:px-8 pt-4 pb-0">
+        <div className="flex gap-1 overflow-x-auto">
           {agencyOrder.map((agId) => (
             <Link
               key={agId}
               href={`/agency/${agId}`}
-              className={`px-4 py-2 text-[10px] tracking-wider uppercase whitespace-nowrap border-b-2 transition-all ${
+              className={`px-5 py-3 text-xs tracking-wider uppercase whitespace-nowrap border-b-2 transition-all duration-200 ${
                 agId === id
-                  ? "border-current opacity-100"
-                  : "border-transparent opacity-40 hover:opacity-70"
+                  ? "border-current opacity-100 bg-[var(--steel)]/10"
+                  : "border-transparent opacity-50 hover:opacity-90 hover:bg-[var(--steel)]/5"
               }`}
               style={{ fontFamily: 'Share Tech Mono, monospace', color: agencies[agId].color }}
             >
-              {agencies[agId].name.split(" ")[0]}
+              {agencies[agId].name}
             </Link>
           ))}
         </div>

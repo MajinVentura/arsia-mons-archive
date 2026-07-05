@@ -20,46 +20,55 @@ const agencyLinks = [
 ];
 
 export default function Home() {
-  const [bootIndex, setBootIndex] = useState(0);
-  const [bootComplete, setBootComplete] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  // Check if boot sequence has already played this session
+  const hasBooted = sessionStorage.getItem("arsia-boot-complete") === "true";
+
+  const [bootIndex, setBootIndex] = useState(hasBooted ? bootSequence.length : 0);
+  const [bootComplete, setBootComplete] = useState(hasBooted);
+  const [showContent, setShowContent] = useState(hasBooted);
 
   useEffect(() => {
+    if (hasBooted) return; // Skip animation if already played
     if (bootIndex < bootSequence.length) {
       const timer = setTimeout(() => {
         setBootIndex(bootIndex + 1);
       }, 400 + Math.random() * 300);
       return () => clearTimeout(timer);
     } else {
-      setTimeout(() => setBootComplete(true), 500);
+      setTimeout(() => {
+        setBootComplete(true);
+        sessionStorage.setItem("arsia-boot-complete", "true");
+      }, 500);
       setTimeout(() => setShowContent(true), 800);
     }
-  }, [bootIndex]);
+  }, [bootIndex, hasBooted]);
 
   return (
     <div className="min-h-screen pt-20 pb-12 px-4 md:px-8">
-      {/* Boot sequence */}
-      <div className={`max-w-4xl mx-auto transition-opacity duration-1000 ${bootComplete ? 'opacity-30' : 'opacity-100'}`}>
-        <div className="mb-8 p-4 border border-[var(--steel)]/30">
-          {bootSequence.slice(0, bootIndex).map((line, i) => (
-            <div
-              key={i}
-              className="text-xs mb-1"
-              style={{
-                fontFamily: 'Share Tech Mono, monospace',
-                color: i === bootSequence.length - 1 ? 'var(--phosphor)' : 'var(--signal-white)',
-                opacity: i === bootSequence.length - 1 ? 1 : 0.5,
-              }}
-            >
-              <span className="text-[var(--phosphor)]/40 mr-2">&gt;</span>
-              {line}
-            </div>
-          ))}
-          {bootIndex < bootSequence.length && (
-            <span className="inline-block w-2 h-4 bg-[var(--phosphor)] animate-pulse" />
-          )}
+      {/* Boot sequence — only shows on first visit */}
+      {!hasBooted && (
+        <div className={`max-w-4xl mx-auto transition-opacity duration-1000 ${bootComplete ? 'opacity-30' : 'opacity-100'}`}>
+          <div className="mb-8 p-4 border border-[var(--steel)]/30">
+            {bootSequence.slice(0, bootIndex).map((line, i) => (
+              <div
+                key={i}
+                className="text-xs mb-1"
+                style={{
+                  fontFamily: 'Share Tech Mono, monospace',
+                  color: i === bootSequence.length - 1 ? 'var(--phosphor)' : 'var(--signal-white)',
+                  opacity: i === bootSequence.length - 1 ? 1 : 0.5,
+                }}
+              >
+                <span className="text-[var(--phosphor)]/40 mr-2">&gt;</span>
+                {line}
+              </div>
+            ))}
+            {bootIndex < bootSequence.length && (
+              <span className="inline-block w-2 h-4 bg-[var(--phosphor)] animate-pulse" />
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Main content */}
       <div className={`transition-all duration-1000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
@@ -137,8 +146,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Quick access grid */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
+        {/* Quick access grid — now includes Sector Map */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           <Link href="/timeline" className="group border border-[var(--steel)]/30 p-5 hover:border-[var(--amber)]/40 transition-all duration-300 bg-[#080808]">
             <div className="text-[9px] text-[var(--amber)]/60 mb-2" style={{ fontFamily: 'Courier Prime, monospace' }}>FREQ 88.7MHz</div>
             <h3 className="text-sm tracking-wider mb-2 group-hover:text-[var(--amber)] transition-colors" style={{ fontFamily: 'Share Tech Mono, monospace', color: 'var(--signal-white)' }}>
@@ -156,6 +165,16 @@ export default function Home() {
             </h3>
             <p className="text-[11px] leading-relaxed" style={{ color: 'var(--signal-white)', opacity: 0.4 }}>
               Classified armament database. Authorization required.
+            </p>
+          </Link>
+
+          <Link href="/districts" className="group border border-[var(--steel)]/30 p-5 hover:border-[var(--static-cyan)]/40 transition-all duration-300 bg-[#080808]">
+            <div className="text-[9px] text-[var(--static-cyan)]/60 mb-2" style={{ fontFamily: 'Courier Prime, monospace' }}>FREQ 156.9MHz</div>
+            <h3 className="text-sm tracking-wider mb-2 group-hover:text-[var(--static-cyan)] transition-colors" style={{ fontFamily: 'Share Tech Mono, monospace', color: 'var(--signal-white)' }}>
+              SECTOR MAP
+            </h3>
+            <p className="text-[11px] leading-relaxed" style={{ color: 'var(--signal-white)', opacity: 0.4 }}>
+              Colony district intelligence. Territorial control analysis.
             </p>
           </Link>
 
