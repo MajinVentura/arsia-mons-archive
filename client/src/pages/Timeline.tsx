@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface TimelineEvent {
   sol: string;
@@ -150,24 +151,25 @@ const categoryLabels: Record<string, string> = {
 
 export default function Timeline() {
   const [filter, setFilter] = useState<string>("all");
+  const [expandedNode, setExpandedNode] = useState<number | null>(null);
 
   const filtered = filter === "all" ? events : events.filter(e => e.category === filter);
 
   return (
     <div className="min-h-screen pt-20 pb-16 px-4 md:px-8">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-6 pt-6">
           <h1 className="text-xl md:text-2xl tracking-wider mb-2" style={{ fontFamily: 'Share Tech Mono, monospace', color: 'var(--phosphor)' }}>
             COLONY TIMELINE
           </h1>
           <p className="text-xs" style={{ color: 'var(--signal-white)', opacity: 0.4 }}>
-            Recovered temporal records — SOL -847 to present. {events.length} events catalogued.
+            Recovered temporal records — SOL -847 to present. {events.length} events catalogued. Click a node to expand.
           </p>
         </div>
 
         {/* Category filter */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-2 mb-10">
           <button
             onClick={() => setFilter("all")}
             className={`px-3 py-1.5 text-[10px] tracking-wider border transition-all ${
@@ -177,7 +179,7 @@ export default function Timeline() {
             }`}
             style={{ fontFamily: 'Share Tech Mono, monospace' }}
           >
-            ALL
+            ALL ({events.length})
           </button>
           {Object.entries(categoryLabels).map(([key, label]) => (
             <button
@@ -199,70 +201,134 @@ export default function Timeline() {
           ))}
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-[60px] md:left-[80px] top-0 bottom-0 w-px bg-[var(--steel)]/20" />
+        {/* Vertical Node Graph Timeline */}
+        <div className="relative ml-6 md:ml-12">
+          {/* Vertical connector line */}
+          <div className="absolute top-0 bottom-0 left-[6px] w-px bg-[var(--steel)]/30" />
 
-          <div className="space-y-8">
-            {filtered.map((event, i) => (
-              <div key={i} className="relative flex gap-4 md:gap-6">
-                {/* SOL marker */}
-                <div className="w-[60px] md:w-[80px] flex-shrink-0 text-right pr-4 pt-1">
-                  <div
-                    className="text-[9px] tracking-wider"
-                    style={{ fontFamily: 'Courier Prime, monospace', color: categoryColors[event.category], opacity: 0.8 }}
+          {/* Nodes */}
+          <div className="relative flex flex-col gap-0">
+            {filtered.map((event, i) => {
+              const isExpanded = expandedNode === i;
+              const nodeColor = categoryColors[event.category];
+
+              return (
+                <div key={`${event.sol}-${i}`} className="relative">
+                  {/* Node row */}
+                  <button
+                    onClick={() => setExpandedNode(isExpanded ? null : i)}
+                    className="relative group flex items-center gap-4 w-full text-left py-3 cursor-pointer transition-all duration-200 hover:bg-[var(--phosphor)]/3"
+                    style={{ outline: 'none' }}
                   >
-                    {event.sol}
-                  </div>
-                </div>
+                    {/* Pulse ring on active */}
+                    {isExpanded && (
+                      <div
+                        className="absolute left-[-1px] top-1/2 -translate-y-1/2 w-[16px] h-[16px] rounded-full animate-ping opacity-20"
+                        style={{ background: nodeColor }}
+                      />
+                    )}
 
-                {/* Dot on line */}
-                <div
-                  className="absolute left-[57px] md:left-[77px] top-2 w-2 h-2 rounded-full border-2"
-                  style={{ borderColor: categoryColors[event.category], background: '#050505' }}
-                />
-
-                {/* Content card */}
-                <div className="flex-1 border border-[var(--steel)]/20 bg-[#080808] overflow-hidden">
-                  {/* Event image */}
-                  <div className="relative w-full h-[140px] md:h-[180px] overflow-hidden">
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="w-full h-full object-cover opacity-50"
+                    {/* Node circle */}
+                    <div
+                      className={`relative z-10 w-[14px] h-[14px] rounded-full border-2 flex-shrink-0 transition-all duration-200 ${
+                        isExpanded ? 'scale-150' : 'group-hover:scale-125'
+                      }`}
+                      style={{
+                        borderColor: nodeColor,
+                        background: isExpanded ? nodeColor : '#050505',
+                        boxShadow: isExpanded ? `0 0 12px ${nodeColor}` : 'none',
+                      }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent" />
-                    <div className="absolute top-2 right-2 flex gap-2">
-                      <span
-                        className="text-[8px] px-1.5 py-0.5 tracking-wider border"
-                        style={{
-                          fontFamily: 'Share Tech Mono, monospace',
-                          color: categoryColors[event.category],
-                          borderColor: `${categoryColors[event.category]}40`,
-                        }}
-                      >
-                        {categoryLabels[event.category]}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-2 left-3">
-                      <span className={event.classification === "canon" ? "stamp-canon" : event.classification === "classified" ? "stamp-classified" : "stamp-expanded"}>
-                        {event.classification}
-                      </span>
-                    </div>
-                  </div>
 
-                  <div className="p-4">
-                    <h3 className="text-sm tracking-wider mb-2" style={{ fontFamily: 'Share Tech Mono, monospace', color: categoryColors[event.category] }}>
+                    {/* SOL label */}
+                    <div
+                      className="text-[9px] tracking-wider w-[80px] flex-shrink-0"
+                      style={{ fontFamily: 'Courier Prime, monospace', color: nodeColor, opacity: 0.8 }}
+                    >
+                      {event.sol}
+                    </div>
+
+                    {/* Mini thumbnail */}
+                    <div className="w-[60px] h-[36px] overflow-hidden border border-[var(--steel)]/20 opacity-60 group-hover:opacity-90 transition-opacity flex-shrink-0">
+                      <img src={event.image} alt="" className="w-full h-full object-cover" />
+                    </div>
+
+                    {/* Title */}
+                    <div
+                      className="text-[10px] md:text-[11px] tracking-wider leading-tight"
+                      style={{ fontFamily: 'Share Tech Mono, monospace', color: isExpanded ? nodeColor : 'var(--signal-white)', opacity: isExpanded ? 1 : 0.6 }}
+                    >
                       {event.title}
-                    </h3>
-                    <p className="text-[11px] leading-relaxed" style={{ color: 'var(--signal-white)', opacity: 0.6 }}>
-                      {event.description}
-                    </p>
-                  </div>
+                    </div>
+
+                    {/* Expand indicator */}
+                    <div className="ml-auto pr-2 text-[10px] opacity-30 group-hover:opacity-60 transition-opacity" style={{ color: nodeColor }}>
+                      {isExpanded ? '▼' : '▶'}
+                    </div>
+                  </button>
+
+                  {/* Expanded content */}
+                  <AnimatePresence mode="wait">
+                    {isExpanded && (
+                      <motion.div
+                        key={`expanded-${i}`}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+                        className="overflow-hidden ml-[30px]"
+                      >
+                        <div className="border border-[var(--steel)]/30 bg-[#080808] mb-2">
+                          {/* Event image banner */}
+                          <div className="relative w-full h-[180px] md:h-[240px] overflow-hidden">
+                            <img
+                              src={event.image}
+                              alt={event.title}
+                              className="w-full h-full object-cover opacity-70"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/30 to-transparent" />
+                            <div className="absolute top-3 right-3 flex gap-2">
+                              <span
+                                className="text-[8px] px-1.5 py-0.5 tracking-wider border"
+                                style={{
+                                  fontFamily: 'Share Tech Mono, monospace',
+                                  color: nodeColor,
+                                  borderColor: `${nodeColor}40`,
+                                  background: '#050505cc',
+                                }}
+                              >
+                                {categoryLabels[event.category]}
+                              </span>
+                            </div>
+                            <div className="absolute bottom-3 left-4">
+                              <span className={event.classification === "canon" ? "stamp-canon" : event.classification === "classified" ? "stamp-classified" : "stamp-expanded"}>
+                                {event.classification}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Text content */}
+                          <div className="p-5 md:p-6">
+                            <h3
+                              className="text-sm md:text-base tracking-wider mb-3"
+                              style={{ fontFamily: 'Share Tech Mono, monospace', color: nodeColor }}
+                            >
+                              {event.title}
+                            </h3>
+                            <p
+                              className="text-xs md:text-sm leading-relaxed"
+                              style={{ color: 'var(--signal-white)', opacity: 0.7 }}
+                            >
+                              {event.description}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

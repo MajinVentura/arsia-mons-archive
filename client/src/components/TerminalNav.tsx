@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useState, useEffect } from "react";
+import { useAmbientMusic } from "@/hooks/useAudio";
 
 const frequencies = [
   { id: "home", label: "SIGNAL_ORIGIN", path: "/", freq: "0.001" },
@@ -15,6 +16,7 @@ export default function TerminalNav() {
   const [location] = useLocation();
   const [signalStrength, setSignalStrength] = useState(87);
   const [timestamp, setTimestamp] = useState("");
+  const { isPlaying, toggle } = useAmbientMusic();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,6 +43,23 @@ export default function TerminalNav() {
           <span className="text-[var(--amber)]/60">SIGNAL: {signalStrength}%</span>
         </div>
         <div className="flex items-center gap-4">
+          {/* Ambient music toggle */}
+          <button
+            onClick={toggle}
+            className="flex items-center gap-1.5 px-2 py-0.5 border border-[var(--steel)]/30 hover:border-[var(--phosphor)]/40 transition-colors"
+            title={isPlaying ? "Mute lobby music" : "Play lobby music (CLOSER2)"}
+          >
+            <span className={`text-[9px] tracking-wider ${isPlaying ? 'text-[var(--phosphor)]' : 'text-[var(--signal-white)]/40'}`}>
+              {isPlaying ? '♫ AUDIO ON' : '♫ AUDIO OFF'}
+            </span>
+            {isPlaying && (
+              <span className="flex gap-[2px]">
+                <span className="w-[2px] h-[8px] bg-[var(--phosphor)] animate-pulse" style={{ animationDelay: '0ms' }} />
+                <span className="w-[2px] h-[6px] bg-[var(--phosphor)] animate-pulse" style={{ animationDelay: '150ms' }} />
+                <span className="w-[2px] h-[10px] bg-[var(--phosphor)] animate-pulse" style={{ animationDelay: '300ms' }} />
+              </span>
+            )}
+          </button>
           <span className="text-[var(--blood)]">■ CLASSIFIED</span>
           <span className="text-[var(--signal-white)]/40">{timestamp}</span>
         </div>
