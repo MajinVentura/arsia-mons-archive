@@ -214,7 +214,7 @@ const weapons: Weapon[] = [
       { label: "Cost", value: "200 Credits" },
     ],
     lore: "The Poison Flare uses a compound called 'Nightshade-7' — a synthetic toxin developed in Black Rose laboratories that no other agency has been able to replicate. The toxin is absorbed through the skin and lungs simultaneously, making even momentary exposure dangerous. Victims describe a sensation of 'cold fire' spreading through their veins. There is no known antidote. The body must metabolize it naturally — a process that takes hours and leaves permanent scarring on the respiratory system.",
-    soundType: "poison",
+    soundType: "flare",
   },
   {
     name: "PLASMA DETONATOR",

@@ -201,135 +201,154 @@ export default function Timeline() {
           ))}
         </div>
 
-        {/* Vertical Node Graph Timeline */}
-        <div className="relative ml-6 md:ml-12">
-          {/* Vertical connector line */}
-          <div className="absolute top-0 bottom-0 left-[6px] w-px bg-[var(--steel)]/30" />
+        {/* Horizontal Node Graph Timeline */}
+        <div className="relative">
+          {/* Scrollable horizontal track */}
+          <div className="relative overflow-x-auto pb-6" style={{ scrollbarWidth: 'thin', scrollbarColor: 'var(--steel) #0a0a0a' }}>
+            {/* Horizontal connector line */}
+            <div className="absolute top-[60px] left-0 right-0 h-px bg-[var(--steel)]/30" style={{ minWidth: `${filtered.length * 140}px` }} />
 
-          {/* Nodes */}
-          <div className="relative flex flex-col gap-0">
-            {filtered.map((event, i) => {
-              const isExpanded = expandedNode === i;
-              const nodeColor = categoryColors[event.category];
+            {/* Nodes row */}
+            <div className="relative flex items-start" style={{ minWidth: `${filtered.length * 140}px` }}>
+              {filtered.map((event, i) => {
+                const isExpanded = expandedNode === i;
+                const nodeColor = categoryColors[event.category];
 
-              return (
-                <div key={`${event.sol}-${i}`} className="relative">
-                  {/* Node row */}
+                return (
                   <button
+                    key={`${event.sol}-${i}`}
                     onClick={() => setExpandedNode(isExpanded ? null : i)}
-                    className="relative group flex items-center gap-4 w-full text-left py-3 cursor-pointer transition-all duration-200 hover:bg-[var(--phosphor)]/3"
-                    style={{ outline: 'none' }}
+                    className="relative group flex flex-col items-center cursor-pointer transition-all duration-200 flex-shrink-0 pt-2"
+                    style={{ outline: 'none', width: '140px' }}
                   >
-                    {/* Pulse ring on active */}
-                    {isExpanded && (
-                      <div
-                        className="absolute left-[-1px] top-1/2 -translate-y-1/2 w-[16px] h-[16px] rounded-full animate-ping opacity-20"
-                        style={{ background: nodeColor }}
-                      />
-                    )}
-
-                    {/* Node circle */}
+                    {/* SOL label above line */}
                     <div
-                      className={`relative z-10 w-[14px] h-[14px] rounded-full border-2 flex-shrink-0 transition-all duration-200 ${
-                        isExpanded ? 'scale-150' : 'group-hover:scale-125'
-                      }`}
-                      style={{
-                        borderColor: nodeColor,
-                        background: isExpanded ? nodeColor : '#050505',
-                        boxShadow: isExpanded ? `0 0 12px ${nodeColor}` : 'none',
-                      }}
-                    />
-
-                    {/* SOL label */}
-                    <div
-                      className="text-[9px] tracking-wider w-[80px] flex-shrink-0"
+                      className="text-[8px] tracking-wider mb-2"
                       style={{ fontFamily: 'Courier Prime, monospace', color: nodeColor, opacity: 0.8 }}
                     >
                       {event.sol}
                     </div>
 
-                    {/* Mini thumbnail */}
-                    <div className="w-[60px] h-[36px] overflow-hidden border border-[var(--steel)]/20 opacity-60 group-hover:opacity-90 transition-opacity flex-shrink-0">
+                    {/* Node circle on the line */}
+                    <div className="relative">
+                      {isExpanded && (
+                        <div
+                          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full animate-ping opacity-20"
+                          style={{ background: nodeColor }}
+                        />
+                      )}
+                      <div
+                        className={`relative z-10 w-[14px] h-[14px] rounded-full border-2 transition-all duration-200 ${
+                          isExpanded ? 'scale-[1.6]' : 'group-hover:scale-125'
+                        }`}
+                        style={{
+                          borderColor: nodeColor,
+                          background: isExpanded ? nodeColor : '#050505',
+                          boxShadow: isExpanded ? `0 0 12px ${nodeColor}` : 'none',
+                        }}
+                      />
+                    </div>
+
+                    {/* Mini thumbnail below line */}
+                    <div className={`mt-3 w-[90px] h-[52px] overflow-hidden border transition-all duration-200 ${
+                      isExpanded ? 'border-current opacity-100 scale-105' : 'border-[var(--steel)]/20 opacity-50 group-hover:opacity-80'
+                    }`} style={{ borderColor: isExpanded ? nodeColor : undefined }}>
                       <img src={event.image} alt="" className="w-full h-full object-cover" />
                     </div>
 
-                    {/* Title */}
+                    {/* Title hint */}
                     <div
-                      className="text-[10px] md:text-[11px] tracking-wider leading-tight"
-                      style={{ fontFamily: 'Share Tech Mono, monospace', color: isExpanded ? nodeColor : 'var(--signal-white)', opacity: isExpanded ? 1 : 0.6 }}
+                      className="mt-2 text-[8px] tracking-wider text-center leading-tight px-1 h-[28px] overflow-hidden"
+                      style={{ fontFamily: 'Share Tech Mono, monospace', color: isExpanded ? nodeColor : 'var(--signal-white)', opacity: isExpanded ? 1 : 0.5 }}
                     >
-                      {event.title}
-                    </div>
-
-                    {/* Expand indicator */}
-                    <div className="ml-auto pr-2 text-[10px] opacity-30 group-hover:opacity-60 transition-opacity" style={{ color: nodeColor }}>
-                      {isExpanded ? '▼' : '▶'}
+                      {event.title.length > 32 ? event.title.slice(0, 30) + '...' : event.title}
                     </div>
                   </button>
-
-                  {/* Expanded content */}
-                  <AnimatePresence mode="wait">
-                    {isExpanded && (
-                      <motion.div
-                        key={`expanded-${i}`}
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-                        className="overflow-hidden ml-[30px]"
-                      >
-                        <div className="border border-[var(--steel)]/30 bg-[#080808] mb-2">
-                          {/* Event image banner */}
-                          <div className="relative w-full h-[180px] md:h-[240px] overflow-hidden">
-                            <img
-                              src={event.image}
-                              alt={event.title}
-                              className="w-full h-full object-cover opacity-70"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/30 to-transparent" />
-                            <div className="absolute top-3 right-3 flex gap-2">
-                              <span
-                                className="text-[8px] px-1.5 py-0.5 tracking-wider border"
-                                style={{
-                                  fontFamily: 'Share Tech Mono, monospace',
-                                  color: nodeColor,
-                                  borderColor: `${nodeColor}40`,
-                                  background: '#050505cc',
-                                }}
-                              >
-                                {categoryLabels[event.category]}
-                              </span>
-                            </div>
-                            <div className="absolute bottom-3 left-4">
-                              <span className={event.classification === "canon" ? "stamp-canon" : event.classification === "classified" ? "stamp-classified" : "stamp-expanded"}>
-                                {event.classification}
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Text content */}
-                          <div className="p-5 md:p-6">
-                            <h3
-                              className="text-sm md:text-base tracking-wider mb-3"
-                              style={{ fontFamily: 'Share Tech Mono, monospace', color: nodeColor }}
-                            >
-                              {event.title}
-                            </h3>
-                            <p
-                              className="text-xs md:text-sm leading-relaxed"
-                              style={{ color: 'var(--signal-white)', opacity: 0.7 }}
-                            >
-                              {event.description}
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
+
+          {/* Scroll hint */}
+          <div className="text-[8px] tracking-wider text-right mt-1" style={{ fontFamily: 'Courier Prime, monospace', color: 'var(--steel)', opacity: 0.4 }}>
+            SCROLL → TO NAVIGATE TIMELINE
+          </div>
+
+          {/* Expanded content panel below */}
+          <AnimatePresence mode="wait">
+            {expandedNode !== null && filtered[expandedNode] && (
+              <motion.div
+                key={expandedNode}
+                initial={{ opacity: 0, y: -10, height: 0 }}
+                animate={{ opacity: 1, y: 0, height: 'auto' }}
+                exit={{ opacity: 0, y: -10, height: 0 }}
+                transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+                className="mt-4 overflow-hidden"
+              >
+                <div className="border border-[var(--steel)]/30 bg-[#080808]">
+                  {/* Event image banner */}
+                  <div className="relative w-full h-[200px] md:h-[280px] overflow-hidden">
+                    <img
+                      src={filtered[expandedNode].image}
+                      alt={filtered[expandedNode].title}
+                      className="w-full h-full object-cover opacity-70"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/30 to-transparent" />
+                    <div className="absolute top-3 right-3 flex gap-2">
+                      <span
+                        className="text-[8px] px-1.5 py-0.5 tracking-wider border"
+                        style={{
+                          fontFamily: 'Share Tech Mono, monospace',
+                          color: categoryColors[filtered[expandedNode].category],
+                          borderColor: `${categoryColors[filtered[expandedNode].category]}40`,
+                          background: '#050505cc',
+                        }}
+                      >
+                        {categoryLabels[filtered[expandedNode].category]}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-3 left-4">
+                      <span className={filtered[expandedNode].classification === "canon" ? "stamp-canon" : filtered[expandedNode].classification === "classified" ? "stamp-classified" : "stamp-expanded"}>
+                        {filtered[expandedNode].classification}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Text content */}
+                  <div className="p-5 md:p-8">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div
+                        className="text-[9px] tracking-wider"
+                        style={{ fontFamily: 'Courier Prime, monospace', color: categoryColors[filtered[expandedNode].category] }}
+                      >
+                        {filtered[expandedNode].sol}
+                      </div>
+                      <div className="h-px flex-1 bg-[var(--steel)]/20" />
+                      <button
+                        onClick={() => setExpandedNode(null)}
+                        className="text-[9px] tracking-wider px-2 py-0.5 border border-[var(--steel)]/30 hover:border-[var(--blood)]/60 hover:text-[var(--blood)] transition-colors"
+                        style={{ fontFamily: 'Share Tech Mono, monospace', color: 'var(--signal-white)', opacity: 0.5 }}
+                      >
+                        CLOSE
+                      </button>
+                    </div>
+                    <h3
+                      className="text-base md:text-lg tracking-wider mb-4"
+                      style={{ fontFamily: 'Share Tech Mono, monospace', color: categoryColors[filtered[expandedNode].category] }}
+                    >
+                      {filtered[expandedNode].title}
+                    </h3>
+                    <p
+                      className="text-xs md:text-sm leading-relaxed max-w-3xl"
+                      style={{ color: 'var(--signal-white)', opacity: 0.7 }}
+                    >
+                      {filtered[expandedNode].description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>
