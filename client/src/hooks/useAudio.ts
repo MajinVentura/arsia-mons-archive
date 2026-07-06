@@ -1,5 +1,10 @@
 import { useRef, useCallback, useState, useEffect } from "react";
 
+// ============================================================
+// Web Audio API-based sound engine for Chrome compatibility
+// Uses AudioContext + pre-fetched ArrayBuffers for instant playback
+// ============================================================
+
 // Weapon sound file mapping
 type SoundType =
   | "blaster"
@@ -81,62 +86,179 @@ const navTabSounds: Record<string, NavSoundType> = {
   classified: "secret_found",
 };
 
+// ============================================================
+// Singleton AudioContext — shared across all hooks
+// ============================================================
+let audioCtx: AudioContext | null = null;
+const bufferCache: Map<string, AudioBuffer> = new Map();
+
+function getAudioContext(): AudioContext {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  }
+  // Resume if suspended (Chrome autoplay policy)
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+  return audioCtx;
+}
+
+// Ensure AudioContext is resumed on first user interaction (Chrome requirement)
+function ensureAudioUnlocked() {
+  const ctx = getAudioContext();
+  if (ctx.state === "suspended") {
+    ctx.resume();
+  }
+}
+
+// Set up global listener to unlock audio on first interaction
+let unlockListenerAdded = false;
+function addUnlockListener() {
+  if (unlockListenerAdded) return;
+  unlockListenerAdded = true;
+  const unlock = () => {
+    ensureAudioUnlocked();
+    document.removeEventListener("click", unlock);
+    document.removeEventListener("keydown", unlock);
+    document.removeEventListener("touchstart", unlock);
+  };
+  document.addEventListener("click", unlock, { capture: true });
+  document.addEventListener("keydown", unlock, { capture: true });
+  document.addEventListener("touchstart", unlock, { capture: true });
+}
+
+// Fetch and decode audio buffer, with caching
+async function loadBuffer(url: string): Promise<AudioBuffer | null> {
+  if (bufferCache.has(url)) {
+    return bufferCache.get(url)!;
+  }
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return null;
+    const arrayBuffer = await response.arrayBuffer();
+    const ctx = getAudioContext();
+    const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+    bufferCache.set(url, audioBuffer);
+    return audioBuffer;
+  } catch {
+    return null;
+  }
+}
+
+// Play a buffer immediately through the AudioContext
+function playBuffer(buffer: AudioBuffer, volume: number): AudioBufferSourceNode {
+  const ctx = getAudioContext();
+  const source = ctx.createBufferSource();
+  const gainNode = ctx.createGain();
+  gainNode.gain.value = volume;
+  source.buffer = buffer;
+  source.connect(gainNode);
+  gainNode.connect(ctx.destination);
+  source.start(0);
+  return source;
+}
+
+// ============================================================
+// Pre-load critical sounds (nav + menu_select) on mount
+// ============================================================
+let preloadStarted = false;
+function preloadCriticalSounds() {
+  if (preloadStarted) return;
+  preloadStarted = true;
+  // Preload nav sounds
+  Object.values(navSoundFiles).forEach((url) => loadBuffer(url));
+  // Preload first few weapon sounds
+  const priorityWeapons: SoundType[] = ["blaster", "laser", "rocket", "flamer"];
+  priorityWeapons.forEach((key) => loadBuffer(soundFiles[key]));
+}
+
+// ============================================================
+// Hooks
+// ============================================================
+
 export function useWeaponSound() {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const sourceRef = useRef<AudioBufferSourceNode | null>(null);
+
+  useEffect(() => {
+    addUnlockListener();
+    preloadCriticalSounds();
+  }, []);
 
   const playSound = useCallback((type: SoundType) => {
     // Stop any currently playing sound
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+    if (sourceRef.current) {
+      try { sourceRef.current.stop(); } catch {}
     }
 
     const src = soundFiles[type];
     if (!src) return;
 
-    const audio = new Audio(src);
-    audio.volume = 0.35;
-    audioRef.current = audio;
-    audio.play().catch((err) => {
-      console.warn("Weapon SFX play failed:", err);
-    });
+    ensureAudioUnlocked();
+
+    // Try to play from cache first (instant), otherwise fetch then play
+    const cached = bufferCache.get(src);
+    if (cached) {
+      sourceRef.current = playBuffer(cached, 0.35);
+    } else {
+      loadBuffer(src).then((buffer) => {
+        if (buffer) {
+          sourceRef.current = playBuffer(buffer, 0.35);
+        }
+      });
+    }
   }, []);
 
   return { playSound };
 }
 
 export function useNavSound() {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const sourceRef = useRef<AudioBufferSourceNode | null>(null);
+
+  useEffect(() => {
+    addUnlockListener();
+    preloadCriticalSounds();
+  }, []);
 
   const playNavSound = useCallback((tabId: string) => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+    if (sourceRef.current) {
+      try { sourceRef.current.stop(); } catch {}
     }
 
     const soundType = navTabSounds[tabId];
     const src = soundType ? navSoundFiles[soundType] : navSoundFiles.menu_select;
-    
-    const audio = new Audio(src);
-    audio.volume = 0.3;
-    audioRef.current = audio;
-    audio.play().catch((err) => {
-      console.warn("Nav SFX play failed:", err);
-    });
+
+    ensureAudioUnlocked();
+
+    const cached = bufferCache.get(src);
+    if (cached) {
+      sourceRef.current = playBuffer(cached, 0.3);
+    } else {
+      loadBuffer(src).then((buffer) => {
+        if (buffer) {
+          sourceRef.current = playBuffer(buffer, 0.3);
+        }
+      });
+    }
   }, []);
 
   const playMenuClick = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+    if (sourceRef.current) {
+      try { sourceRef.current.stop(); } catch {}
     }
 
-    const audio = new Audio(navSoundFiles.menu_select);
-    audio.volume = 0.25;
-    audioRef.current = audio;
-    audio.play().catch((err) => {
-      console.warn("Menu click SFX play failed:", err);
-    });
+    const src = navSoundFiles.menu_select;
+    ensureAudioUnlocked();
+
+    const cached = bufferCache.get(src);
+    if (cached) {
+      sourceRef.current = playBuffer(cached, 0.4);
+    } else {
+      loadBuffer(src).then((buffer) => {
+        if (buffer) {
+          sourceRef.current = playBuffer(buffer, 0.4);
+        }
+      });
+    }
   }, []);
 
   return { playNavSound, playMenuClick };
@@ -148,6 +270,9 @@ export function useAmbientMusic() {
   const hasAutoStarted = useRef(false);
 
   useEffect(() => {
+    addUnlockListener();
+
+    // Use HTMLAudioElement for ambient music (long-running, looped)
     const audio = new Audio("/manus-storage/closer2_83535161.mp3");
     audio.loop = true;
     audio.volume = 0.25;
@@ -168,9 +293,11 @@ export function useAmbientMusic() {
           }).catch(() => {});
           document.removeEventListener("click", startOnInteraction);
           document.removeEventListener("keydown", startOnInteraction);
+          document.removeEventListener("touchstart", startOnInteraction);
         };
         document.addEventListener("click", startOnInteraction, { once: true });
         document.addEventListener("keydown", startOnInteraction, { once: true });
+        document.addEventListener("touchstart", startOnInteraction, { once: true });
       });
     };
 
@@ -195,6 +322,22 @@ export function useAmbientMusic() {
   }, [isPlaying]);
 
   return { isPlaying, toggle };
+}
+
+// Global menu click player for App.tsx (uses Web Audio API)
+export function playGlobalMenuClick() {
+  ensureAudioUnlocked();
+  const src = navSoundFiles.menu_select;
+  const cached = bufferCache.get(src);
+  if (cached) {
+    playBuffer(cached, 0.4);
+  } else {
+    loadBuffer(src).then((buffer) => {
+      if (buffer) {
+        playBuffer(buffer, 0.4);
+      }
+    });
+  }
 }
 
 export type { SoundType, NavSoundType };
