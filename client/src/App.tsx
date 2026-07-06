@@ -62,7 +62,7 @@ function useGlobalClickSound() {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
       }
-      const audio = new Audio("/manus-storage/menu_select_1_3496193a.wav");
+      const audio = new Audio("/manus-storage/menu_select_1_aa853c3c.wav");
       audio.volume = 0.2;
       audioRef.current = audio;
       audio.play().catch(() => {});
