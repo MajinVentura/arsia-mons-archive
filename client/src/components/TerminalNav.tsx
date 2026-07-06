@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useState, useEffect } from "react";
-import { useAmbientMusic } from "@/hooks/useAudio";
+import { useAmbientMusic, useNavSound } from "@/hooks/useAudio";
 
 const frequencies = [
   { id: "home", label: "SIGNAL_ORIGIN", path: "/", freq: "0.001" },
@@ -17,6 +17,7 @@ export default function TerminalNav() {
   const [signalStrength, setSignalStrength] = useState(87);
   const [timestamp, setTimestamp] = useState("");
   const { isPlaying, toggle } = useAmbientMusic();
+  const { playNavSound } = useNavSound();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -74,6 +75,7 @@ export default function TerminalNav() {
           <Link
             key={freq.id}
             href={freq.path}
+            onClick={() => playNavSound(freq.id)}
             className={`
               relative px-3 py-2 text-[11px] tracking-wider whitespace-nowrap transition-all duration-200
               font-[var(--font-display)] uppercase

@@ -584,7 +584,10 @@ export default function Equipment() {
 
                 {/* Sound effect button */}
                 <button
-                  onClick={() => playSound(currentWeapon.soundType)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    playSound(currentWeapon.soundType);
+                  }}
                   className="flex items-center gap-2 px-4 py-2 mb-5 border border-[var(--phosphor)]/30 bg-[var(--phosphor)]/5 hover:bg-[var(--phosphor)]/10 hover:border-[var(--phosphor)]/60 transition-all duration-200 active:scale-95 group"
                   title="Play weapon sound effect"
                 >
