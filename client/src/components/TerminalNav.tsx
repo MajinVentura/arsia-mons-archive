@@ -69,7 +69,7 @@ export default function TerminalNav() {
       {/* Frequency navigation */}
       <div className="flex items-center gap-0 overflow-x-auto px-2 py-0">
         <div className="flex items-center mr-3 pl-2">
-          <img src="/manus-storage/logo-icon_ee83a0d3.png" alt="Archive" className="w-6 h-6 opacity-80" />
+          <img src="/assets/logo-icon_ee83a0d3.png" alt="Archive" className="w-6 h-6 opacity-80" />
         </div>
         {frequencies.map((freq) => (
           <Link

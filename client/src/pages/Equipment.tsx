@@ -24,7 +24,7 @@ const weapons: Weapon[] = [
     cost: "Standard Issue",
     classification: "canon",
     category: "primary",
-    image: "/manus-storage/weapon-blaster_5a318852.png",
+    image: "/assets/weapon-blaster_5a318852.png",
     description: "Standard-issue energy weapon for all Silencer operatives. Fires concentrated plasma bolts at medium range with infinite ammunition. Reliable, accurate, and quiet enough for covert operations. Every agency issues a variant — the differences are cosmetic, not functional. Moderate fire rate with high health damage but reduced effectiveness against shields.",
     specs: [
       { label: "Damage", value: "High (Health)" },
@@ -42,7 +42,7 @@ const weapons: Weapon[] = [
     cost: "200 Credits",
     classification: "canon",
     category: "primary",
-    image: "/manus-storage/weapon-laser_69aa6ec2.png",
+    image: "/assets/weapon-laser_69aa6ec2.png",
     description: "Precision energy weapon designed specifically to penetrate defensive shield systems. Fires a concentrated beam that passes through energy barriers with devastating efficiency. Limited ammunition requires tactical discipline — 5 shots per purchase, maximum capacity of 30. The weapon of choice for operatives facing shielded targets.",
     specs: [
       { label: "Damage", value: "High (Shields)" },
@@ -60,7 +60,7 @@ const weapons: Weapon[] = [
     cost: "400 Credits",
     classification: "canon",
     category: "primary",
-    image: "/manus-storage/weapon-rocket_a40ac120.png",
+    image: "/assets/weapon-rocket_a40ac120.png",
     description: "Shoulder-mounted rocket system capable of destroying reinforced structures and armored targets. Devastating splash damage on impact. 3 rockets per purchase with a maximum capacity of 30. The weapon of choice for operatives who prefer certainty over subtlety. Effective against both personnel and fixed installations.",
     specs: [
       { label: "Damage", value: "Extreme + Splash" },
@@ -78,7 +78,7 @@ const weapons: Weapon[] = [
     cost: "300 Credits",
     classification: "canon",
     category: "primary",
-    image: "/manus-storage/weapon-flamer_cee61d81.png",
+    image: "/assets/weapon-flamer_cee61d81.png",
     description: "Pressurized fuel system projecting a continuous stream of superheated plasma. Unique among weapons for completely bypassing energy shields — the thermal stream passes through defensive barriers as if they don't exist. 15 fuel units per purchase, maximum 75. Devastating in corridors and confined spaces. The psychological impact often exceeds the physical damage.",
     specs: [
       { label: "Damage", value: "High (Continuous)" },
@@ -96,7 +96,7 @@ const weapons: Weapon[] = [
     cost: "100 Credits",
     classification: "canon",
     category: "grenade",
-    image: "/manus-storage/weapon-emp_2b2bbd20.png",
+    image: "/assets/weapon-emp_2b2bbd20.png",
     description: "Electromagnetic pulse device that instantly disables all energy shields within its blast radius. Does not deal direct damage but leaves targets completely vulnerable to follow-up attacks. Essential for coordinated assaults against heavily shielded positions. Cheap, effective, and feared by anyone relying on shield technology for survival.",
     specs: [
       { label: "Damage", value: "None (Shield Strip)" },
@@ -114,7 +114,7 @@ const weapons: Weapon[] = [
     cost: "100 Credits",
     classification: "canon",
     category: "grenade",
-    image: "/manus-storage/weapon-shaped-bomb_616d80c8.png",
+    image: "/assets/weapon-shaped-bomb_616d80c8.png",
     description: "Focused directional explosive that channels its entire blast force upward. Designed for breaching floors, ceilings, and elevated positions. When detonated, the shaped charge creates a vertical column of destruction while leaving the surrounding area relatively intact. Tactical tool for creating unexpected entry points.",
     specs: [
       { label: "Damage", value: "High (Directional)" },
@@ -132,7 +132,7 @@ const weapons: Weapon[] = [
     cost: "200 Credits",
     classification: "canon",
     category: "grenade",
-    image: "/manus-storage/weapon-plasma-bomb_3d679487.png",
+    image: "/assets/weapon-plasma-bomb_3d679487.png",
     description: "High-damage area explosive that detonates in a sphere of superheated plasma. Occupies 2 inventory slots due to its size and power. Can be placed on surfaces or thrown. Used for breaching reinforced doors, destroying equipment, or area denial. The detonation produces a distinctive blue flash visible through walls.",
     specs: [
       { label: "Damage", value: "Extreme (Area)" },
@@ -150,7 +150,7 @@ const weapons: Weapon[] = [
     cost: "4,000 Credits",
     classification: "canon",
     category: "grenade",
-    image: "/manus-storage/weapon-neutron_36eab0ab.png",
+    image: "/assets/weapon-neutron_36eab0ab.png",
     description: "The most devastating weapon available on Mars. When detonated, kills every living entity in the entire map region — operatives, civilians, guards, everyone. The only defense is being inside a sealed agency base at the moment of detonation. Occupies 8 inventory slots. Its mere possession changes the dynamics of any conflict.",
     specs: [
       { label: "Damage", value: "LETHAL — All entities" },
@@ -168,7 +168,7 @@ const weapons: Weapon[] = [
     cost: "300 Credits",
     classification: "canon",
     category: "deployable",
-    image: "/manus-storage/weapon-cannon_c2af2e86.png",
+    image: "/assets/weapon-cannon_c2af2e86.png",
     description: "Automated defense turret deployable at any location. Fires rapid wall projectiles at hostile targets within range. Uses friend-or-foe identification based on agency biosignatures. Can be destroyed but requires significant firepower. Essential for protecting stored intelligence and controlling chokepoints.",
     specs: [
       { label: "Damage", value: "Medium (Rapid)" },
@@ -186,7 +186,7 @@ const weapons: Weapon[] = [
     cost: "200 Credits",
     classification: "canon",
     category: "deployable",
-    image: "/manus-storage/weapon-flare_9689aa1a.png",
+    image: "/assets/weapon-flare_9689aa1a.png",
     description: "Stationary incendiary device that creates a persistent zone of fire damage. Once deployed, burns continuously and damages any hostile entity that enters its radius. Used for controlling corridors, blocking escape routes, and protecting flanks. Cannot be extinguished once lit — burns until fuel is exhausted.",
     specs: [
       { label: "Damage", value: "Sustained (Area)" },
@@ -205,7 +205,7 @@ const weapons: Weapon[] = [
     classification: "canon",
     category: "deployable",
     exclusive: "BLACK ROSE",
-    image: "/manus-storage/weapon-poison-flamer_8363d007.png",
+    image: "/assets/weapon-poison-flamer_8363d007.png",
     description: "Black Rose exclusive variant of the standard Flare. Combines incendiary damage with a toxic poison compound that continues to damage victims after they leave the area. The poison lingers in the bloodstream, slowly draining health over time. A uniquely cruel device that punishes even brief exposure.",
     specs: [
       { label: "Damage", value: "Fire + Poison (DOT)" },
@@ -223,7 +223,7 @@ const weapons: Weapon[] = [
     cost: "200 Credits",
     classification: "canon",
     category: "deployable",
-    image: "/manus-storage/weapon-detonator_0bb97e6c.png",
+    image: "/assets/weapon-detonator_0bb97e6c.png",
     description: "Remote-detonated explosive that can be placed on any surface and triggered at will. Unlike timed explosives, the operator maintains full control over when the detonation occurs. Ideal for ambushes, traps, and controlled demolition. Can be placed and left indefinitely until triggered.",
     specs: [
       { label: "Damage", value: "High (Area)" },
@@ -241,7 +241,7 @@ const weapons: Weapon[] = [
     cost: "100 Credits",
     classification: "canon",
     category: "deployable",
-    image: "/manus-storage/weapon-camera_71a0b385.png",
+    image: "/assets/weapon-camera_71a0b385.png",
     description: "Deployable remote viewing device that provides real-time visual feed of its location. Once placed, the operative can switch to the camera's perspective at any time. Essential for monitoring enemy movements, watching approach routes, and gathering intelligence without physical presence.",
     specs: [
       { label: "Function", value: "Remote visual feed" },
@@ -260,7 +260,7 @@ const weapons: Weapon[] = [
     classification: "canon",
     category: "utility",
     exclusive: "NOXIS",
-    image: "/manus-storage/item-healthpack_3395e51c.png",
+    image: "/assets/item-healthpack_3395e51c.png",
     description: "Noxis-exclusive medical device that instantly restores the operative's health to maximum. Contains a concentrated bio-sporria compound that accelerates cellular regeneration. Only Noxis operatives possess the biological compatibility required to survive the injection — for anyone else, the compound is lethal.",
     specs: [
       { label: "Effect", value: "Full health restore" },
@@ -279,7 +279,7 @@ const weapons: Weapon[] = [
     classification: "canon",
     category: "utility",
     exclusive: "LAZARUS",
-    image: "/manus-storage/item-lazarus-tract_076c2ae9.png",
+    image: "/assets/item-lazarus-tract_076c2ae9.png",
     description: "Lazarus-exclusive artifact that converts nearby civilians to the operative's team. The mechanism is unknown — subjects exposed to the Tract simply... change allegiance. They retain their memories and personality but become utterly devoted to Lazarus. The process appears painless. The converted show no signs of coercion. This makes it more disturbing, not less.",
     specs: [
       { label: "Effect", value: "Converts civilians to team" },
@@ -298,7 +298,7 @@ const weapons: Weapon[] = [
     classification: "canon",
     category: "utility",
     exclusive: "CALIBER",
-    image: "/manus-storage/item-security-pass_47dcc3f3.png",
+    image: "/assets/item-security-pass_47dcc3f3.png",
     description: "Caliber-exclusive device that causes all guards and security robots to ignore the operative completely. The pass broadcasts a signal that registers the bearer as 'authorized personnel' to every security system simultaneously. Extremely expensive but provides complete freedom of movement through guarded areas.",
     specs: [
       { label: "Effect", value: "Guards/robots ignore you" },
@@ -317,7 +317,7 @@ const weapons: Weapon[] = [
     classification: "canon",
     category: "utility",
     exclusive: "STATIC",
-    image: "/manus-storage/item-virus_d960fd9f.png",
+    image: "/assets/item-virus_d960fd9f.png",
     description: "Static-exclusive hacking device that infects robots and fixed cannons, turning enemy technology against its owners. The virus rewrites IFF protocols, causing infected machines to attack their former allies. Also capable of disabling enemy technological systems entirely. The ultimate expression of Static's philosophy: your technology is only yours until we decide otherwise.",
     specs: [
       { label: "Effect", value: "Converts/disables enemy tech" },
@@ -335,7 +335,7 @@ const weapons: Weapon[] = [
     cost: "200 Credits",
     classification: "canon",
     category: "utility",
-    image: "/manus-storage/weapon-poison_51d75143.png",
+    image: "/assets/weapon-poison_51d75143.png",
     description: "A proximity-activated toxin dispersal device that poisons nearby enemy operatives. The compound is absorbed through exposed skin and begins degrading cellular tissue immediately. Damage is sustained over time, making it difficult for victims to identify when they were poisoned or by whom. The perfect tool for operatives who prefer their kills to look like accidents.",
     specs: [
       { label: "Damage", value: "Sustained (DOT)" },
@@ -353,7 +353,7 @@ const weapons: Weapon[] = [
     cost: "Standard Issue",
     classification: "canon",
     category: "utility",
-    image: "/manus-storage/item-disguise_0596c307.png",
+    image: "/assets/item-disguise_0596c307.png",
     description: "Holographic projection system that allows operatives to assume the appearance of colony NPCs — workers, guards, civilians. Disguise breaks when firing weapons or taking damage. Essential for moving through guarded areas undetected. Alters biosignature to match the projected identity.",
     specs: [
       { label: "Duration", value: "Unlimited (while passive)" },
@@ -371,7 +371,7 @@ const weapons: Weapon[] = [
     cost: "Standard Issue",
     classification: "canon",
     category: "utility",
-    image: "/manus-storage/item-jetpack_8e47f9a2.png",
+    image: "/assets/item-jetpack_8e47f9a2.png",
     description: "Personal flight system providing sustained vertical thrust. Auto-recharges when grounded. Essential for navigating the colony's vertical architecture and accessing elevated terminals. Upgradeable for extended flight duration. Standard issue for all operatives.",
     specs: [
       { label: "Flight Duration", value: "5 seconds (base)" },
@@ -389,7 +389,7 @@ const weapons: Weapon[] = [
     cost: "Standard Issue",
     classification: "canon",
     category: "utility",
-    image: "/manus-storage/item-base-door_c37dff46.png",
+    image: "/assets/item-base-door_c37dff46.png",
     description: "Device that relocates the team's base entrance to a new position. Every operative starts with one. Strategic placement of the base door determines how accessible your team's headquarters is — and how vulnerable. A well-placed door can mean the difference between a secure operation and a compromised one.",
     specs: [
       { label: "Function", value: "Relocate base entrance" },
@@ -407,7 +407,7 @@ const weapons: Weapon[] = [
     cost: "500 Credits",
     classification: "canon",
     category: "utility",
-    image: "/manus-storage/item-insider-info_dd14ef9f.png",
+    image: "/assets/item-insider-info_dd14ef9f.png",
     description: "Purchased intelligence that advances your team's secret progress by 20 points. Represents classified documents, stolen data, or bribed testimony that brings your agency closer to uncovering the colony's deepest secrets. Expensive but provides guaranteed progress toward mission objectives.",
     specs: [
       { label: "Effect", value: "+20 Secret Progress" },

@@ -76,7 +76,7 @@ export default function Home() {
         <div className="relative w-full max-w-7xl mx-auto mb-12">
           <div className="relative overflow-hidden border border-[var(--phosphor)]/20">
             <img
-              src="/manus-storage/hero-terminal_622699e9.png"
+              src="/assets/hero-terminal_622699e9.png"
               alt="Arsia Mons Terminal"
               className="w-full h-[300px] md:h-[400px] object-cover opacity-60"
             />

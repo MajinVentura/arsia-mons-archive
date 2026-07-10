@@ -42,7 +42,7 @@ const maps: MapData[] = [
     maxPlayers: 7,
     teams: 6,
     tagline: "You'll have to out-think your opponents to kill them here.",
-    image: "/manus-storage/map-ally10c_2dbb1198.png",
+    image: "/assets/map-ally10c_2dbb1198.png",
     description: "A multi-tiered horizontal complex featuring stacked corridors connected by vertical access shafts. The ladder-like layout forces vertical thinking — engagements happen across elevation changes, making positioning critical.",
     tacticalNotes: "Six-team configuration in a relatively compact space means alliances form and break rapidly. The horizontal corridors provide long sightlines for ranged weapons, while the vertical shafts create ambush opportunities. Control the central connectors to dominate movement between levels."
   },
@@ -54,7 +54,7 @@ const maps: MapData[] = [
     maxPlayers: 8,
     teams: 8,
     tagline: "Enter the mining camps of Mars and pray you get out alive.",
-    image: "/manus-storage/map-cran01h_6f7ad8c7.png",
+    image: "/assets/map-cran01h_6f7ad8c7.png",
     description: "The largest standard combat zone — a sprawling mining facility with cavernous open areas, elevated observation platforms, and a network of maintenance tunnels. Originally a Caliber Industries ore extraction site before it was abandoned during the Sector 4 Blackout.",
     tacticalNotes: "Eight teams in a massive arena. The open mining chambers favor explosive weapons and long-range engagements. Maintenance tunnels offer flanking routes but are narrow enough for flamer traps. Elevated platforms provide overwatch but limited escape routes."
   },
@@ -66,7 +66,7 @@ const maps: MapData[] = [
     maxPlayers: 4,
     teams: 3,
     tagline: "Small, Fast, and Furious. Don't say you weren't warned.",
-    image: "/manus-storage/map-easy05c_c5777791.png",
+    image: "/assets/map-easy05c_c5777791.png",
     description: "A compact, claustrophobic arena with no room to hide. Angular corridors create a compressed labyrinth where every turn could be your last. Designed for rapid, brutal engagements — matches here rarely last long.",
     tacticalNotes: "The smallest combat zone in active rotation. Three teams in this space guarantees constant contact. No dead ends means you're never truly cornered, but also never truly safe. Fast weapons dominate — rockets and bombs are as dangerous to the user as the target."
   },
@@ -78,7 +78,7 @@ const maps: MapData[] = [
     maxPlayers: 8,
     teams: 4,
     tagline: "Climb quickly or you'll pay the price.",
-    image: "/manus-storage/map-pit16d_7d33c9a5.png",
+    image: "/assets/map-pit16d_7d33c9a5.png",
     description: "A vertical nightmare. A deep industrial shaft with platforms at staggered heights, connected by ladders and narrow walkways. Gravity is your enemy — falling means death or disadvantage. The pit structure rewards aggressive vertical movement.",
     tacticalNotes: "Four teams competing for high ground in a vertical arena. The central shaft is a kill zone — crossing it exposes you from multiple angles. Jetpacks are invaluable here. Shaped bombs dropped from above are devastating. Control the top platforms and rain death downward."
   },
@@ -90,7 +90,7 @@ const maps: MapData[] = [
     maxPlayers: 8,
     teams: 6,
     tagline: "Left, Up, Right — the action is all around.",
-    image: "/manus-storage/map-star72_57dd2b39.png",
+    image: "/assets/map-star72_57dd2b39.png",
     description: "An extremely wide combat zone spanning the full breadth of a colony sub-level. Multiple distinct areas — control rooms, observation decks, connecting walkways — create a series of micro-arenas within the larger battlefield.",
     tacticalNotes: "The widest map in rotation. Six teams spread across a massive horizontal space creates a war of territory control. Teams that hold the center can project force in both directions, but are vulnerable to coordinated pincer attacks."
   },
@@ -102,7 +102,7 @@ const maps: MapData[] = [
     maxPlayers: 6,
     teams: 4,
     tagline: "Don't get caught in the corners with your Secret.",
-    image: "/manus-storage/map-thet06e_085863dc.png",
+    image: "/assets/map-thet06e_085863dc.png",
     description: "A rectangular complex where the corner chambers are both sanctuary and trap. Each corner room offers defensible positions but limited escape routes — get cornered while carrying intelligence and you're dead.",
     tacticalNotes: "Four teams in a map designed around corner control. The corner chambers are large enough to defend but have only one or two exits — making them deathtraps if breached. Carrying a Secret through the open corridors is a calculated risk."
   }
@@ -112,7 +112,7 @@ const districts: District[] = [
   {
     name: "INDUSTRIAL SECTOR",
     designation: "SECTOR 4 — OXYGEN PROCESSING",
-    image: "/manus-storage/district-industrial_216fc111.png",
+    image: "/assets/district-industrial_216fc111.png",
     atmosphere: "Heavy machinery noise. Chemical vapor. Constant hum of atmospheric processors. The air tastes metallic.",
     controlledBy: "NOXIS CORPORATION",
     classification: "canon",
@@ -122,7 +122,7 @@ const districts: District[] = [
   {
     name: "GOVERNMENT SECTOR",
     designation: "SECTOR 7 — MCA HEADQUARTERS",
-    image: "/manus-storage/district-government_54c0d2d5.png",
+    image: "/assets/district-government_54c0d2d5.png",
     atmosphere: "Oppressive silence. Surveillance cameras track every movement. The architecture is designed to make you feel small.",
     controlledBy: "MARTIAN COLONIAL AUTHORITY",
     classification: "canon",
@@ -132,7 +132,7 @@ const districts: District[] = [
   {
     name: "THE DEEP WARRENS",
     designation: "SECTOR 12 — SUBTERRANEAN",
-    image: "/manus-storage/district-underground_c4aaf5ed.png",
+    image: "/assets/district-underground_c4aaf5ed.png",
     atmosphere: "Dripping water. Bioluminescent fungi. The smell of wet stone and something older. Sounds echo wrong down here.",
     controlledBy: "CONTESTED / UNKNOWN",
     classification: "expanded",
@@ -142,7 +142,7 @@ const districts: District[] = [
   {
     name: "THE HOLLOWS",
     designation: "SECTOR 9 — BLACK MARKET",
-    image: "/manus-storage/district-market_1c613953.png",
+    image: "/assets/district-market_1c613953.png",
     atmosphere: "Neon chaos. Shouting vendors. The smell of cooking food and chemical solvents. Danger is a constant background hum.",
     controlledBy: "NO SINGLE AUTHORITY",
     classification: "expanded",

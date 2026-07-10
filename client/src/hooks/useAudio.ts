@@ -41,38 +41,38 @@ type NavSoundType =
   | "menu_select";
 
 const soundFiles: Record<SoundType, string> = {
-  blaster: "/manus-storage/blaster_9998be4c.wav",
-  laser: "/manus-storage/laser_ac0087f4.wav",
-  rocket: "/manus-storage/rocket1_89dfad3d.wav",
-  flamer: "/manus-storage/flamer_ee593747.wav",
-  emp: "/manus-storage/emp_shield_down_ddfc2cad.wav",
-  shaped_bomb: "/manus-storage/shaped_bomb_58d8f378.wav",
-  plasma_bomb: "/manus-storage/plasma_bomb_50c628b2.wav",
-  neutron: "/manus-storage/neutron_bomb_59b13d28.wav",
-  cannon: "/manus-storage/fixed_cannon_a994a187.wav",
-  flare: "/manus-storage/flare_d0449c55.wav",
-  poison: "/manus-storage/poison_7e194282.wav",
-  health: "/manus-storage/health_pack_4a8eadb3.wav",
-  lazarus: "/manus-storage/Lazarus_tract_24356333.wav",
-  security: "/manus-storage/security_pass_294f663a.wav",
-  virus: "/manus-storage/virus_9485e695.wav",
-  disguise: "/manus-storage/disguise_module_e3421a3c.wav",
-  jetpack: "/manus-storage/jetpak1_6989cdf8.wav",
-  camera: "/manus-storage/camera_541ae5c8.wav",
-  insider: "/manus-storage/insider_info_0bf38885.wav",
-  door: "/manus-storage/base_door_bec1671e.wav",
-  detonator: "/manus-storage/plasma_detonator_9dd88b2b.wav",
+  blaster: "/assets/blaster_9998be4c.wav",
+  laser: "/assets/laser_ac0087f4.wav",
+  rocket: "/assets/rocket1_89dfad3d.wav",
+  flamer: "/assets/flamer_ee593747.wav",
+  emp: "/assets/emp_shield_down_ddfc2cad.wav",
+  shaped_bomb: "/assets/shaped_bomb_58d8f378.wav",
+  plasma_bomb: "/assets/plasma_bomb_50c628b2.wav",
+  neutron: "/assets/neutron_bomb_59b13d28.wav",
+  cannon: "/assets/fixed_cannon_a994a187.wav",
+  flare: "/assets/flare_d0449c55.wav",
+  poison: "/assets/poison_7e194282.wav",
+  health: "/assets/health_pack_4a8eadb3.wav",
+  lazarus: "/assets/Lazarus_tract_24356333.wav",
+  security: "/assets/security_pass_294f663a.wav",
+  virus: "/assets/virus_9485e695.wav",
+  disguise: "/assets/disguise_module_e3421a3c.wav",
+  jetpack: "/assets/jetpak1_6989cdf8.wav",
+  camera: "/assets/camera_541ae5c8.wav",
+  insider: "/assets/insider_info_0bf38885.wav",
+  door: "/assets/base_door_bec1671e.wav",
+  detonator: "/assets/plasma_detonator_9dd88b2b.wav",
 };
 
 const navSoundFiles: Record<NavSoundType, string> = {
-  type1: "/manus-storage/type1_0115caad.wav",
-  type2: "/manus-storage/type2_10dbef38.wav",
-  type3: "/manus-storage/type3_db83556b.wav",
-  type4: "/manus-storage/type4_73cd8b11.wav",
-  type5: "/manus-storage/type5_dd767ebd.wav",
-  transrev: "/manus-storage/transrev_82935a08.wav",
-  secret_found: "/manus-storage/secret_found_97bf6e4b.wav",
-  menu_select: "/manus-storage/menu_select_1_aa853c3c.wav",
+  type1: "/assets/type1_0115caad.wav",
+  type2: "/assets/type2_10dbef38.wav",
+  type3: "/assets/type3_db83556b.wav",
+  type4: "/assets/type4_73cd8b11.wav",
+  type5: "/assets/type5_dd767ebd.wav",
+  transrev: "/assets/transrev_82935a08.wav",
+  secret_found: "/assets/secret_found_97bf6e4b.wav",
+  menu_select: "/assets/menu_select_1_aa853c3c.wav",
 };
 
 // Map nav tab IDs to their sound
@@ -273,7 +273,7 @@ export function useAmbientMusic() {
     addUnlockListener();
 
     // Use HTMLAudioElement for ambient music (long-running, looped)
-    const audio = new Audio("/manus-storage/closer2_83535161.mp3");
+    const audio = new Audio("/assets/closer2_83535161.mp3");
     audio.loop = true;
     audio.volume = 0.25;
     audioRef.current = audio;

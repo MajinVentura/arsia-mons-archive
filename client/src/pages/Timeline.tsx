@@ -16,7 +16,7 @@ const events: TimelineEvent[] = [
     title: "FIRST SURVEY — ANOMALY DETECTED",
     description: "MCA Survey Drone 7 captures imagery of carved symbols inside a natural cave formation near Arsia Mons. Symbols match no known human language. Data classified immediately. Cave sealed during subsequent construction. Survey team leader Dr. Elena Vasquez files a formal objection to the sealing order. Her objection is redacted from official records. She resigns three days later and is never heard from again.",
     classification: "classified",
-    image: "/manus-storage/conspiracy-signal_63a3bd9c.png",
+    image: "/assets/conspiracy-signal_63a3bd9c.png",
     category: "mystery",
   },
   {
@@ -24,7 +24,7 @@ const events: TimelineEvent[] = [
     title: "COLONY FOUNDING — ARSIA MONS",
     description: "The Martian Colonial Authority establishes permanent settlement at Arsia Mons. Initial population: 2,400 colonists. Twelve atmospheric processing companies awarded terraforming contracts. The colony charter promises democratic governance within 50 SOLs. That promise will never be kept.",
     classification: "canon",
-    image: "/manus-storage/timeline-founding_fc290898.png",
+    image: "/assets/timeline-founding_fc290898.png",
     category: "founding",
   },
   {
@@ -32,7 +32,7 @@ const events: TimelineEvent[] = [
     title: "FIRST EXPANSION — LAZARUS EMERGENCE",
     description: "Colony grows to 45,000. First reports of individuals displaying impossible physical resilience. MCA internal security documents these encounters but publicly attributes them to 'oxygen deprivation hallucinations.' Seventeen colonists disappear during this period. All were researching pre-colonial geological surveys.",
     classification: "expanded",
-    image: "/manus-storage/timeline-expansion_58e0e0b4.png",
+    image: "/assets/timeline-expansion_58e0e0b4.png",
     category: "mystery",
   },
   {
@@ -40,7 +40,7 @@ const events: TimelineEvent[] = [
     title: "ATMOSPHERIC CONSOLIDATION BEGINS",
     description: "Of twelve original terraforming contractors, only three remain operational. Noxis, Helios Atmospheric, and Redwind Solutions. Competition intensifies. Noxis begins aggressive acquisition strategy. Two smaller companies accept buyout offers. One refuses.",
     classification: "expanded",
-    image: "/manus-storage/timeline-consolidation_03e83daf.png",
+    image: "/assets/timeline-consolidation_03e83daf.png",
     category: "political",
   },
   {
@@ -48,7 +48,7 @@ const events: TimelineEvent[] = [
     title: "HELIOS ATMOSPHERIC — CATASTROPHIC FAILURE",
     description: "Helios Atmospheric Processing Plant 3 suffers a 'catastrophic cascade failure.' Entire senior engineering staff — 34 people — killed in a single afternoon. Investigation ruled accidental within 48 hours. No independent review permitted. Noxis acquires Helios assets at auction six days later.",
     classification: "classified",
-    image: "/manus-storage/timeline-collapse_abab10bf.png",
+    image: "/assets/timeline-collapse_abab10bf.png",
     category: "conflict",
   },
   {
@@ -56,7 +56,7 @@ const events: TimelineEvent[] = [
     title: "NOXIS MONOPOLY ACHIEVED",
     description: "Redwind Solutions ceases operations after their primary processing facility is 'condemned for safety violations.' Noxis is now the sole atmospheric processor on Mars. They control 70% of breathable oxygen production. The remaining 30% comes from small independent scrubbers that Noxis will spend the next two centuries eliminating.",
     classification: "expanded",
-    image: "/manus-storage/timeline-monopoly_40349712.png",
+    image: "/assets/timeline-monopoly_40349712.png",
     category: "political",
   },
   {
@@ -64,7 +64,7 @@ const events: TimelineEvent[] = [
     title: "SECOND LAZARUS SURGE",
     description: "Exactly 100 SOLs after the first emergence. Government facilities breached in Sectors 3, 7, and 12. Pre-colonial survey data stolen. Three MCA security officers report killing the same individual on three separate occasions within a 4-hour window. All three pass psychological evaluation.",
     classification: "classified",
-    image: "/manus-storage/timeline-lazarus-surge_abde3030.png",
+    image: "/assets/timeline-lazarus-surge_abde3030.png",
     category: "mystery",
   },
   {
@@ -72,7 +72,7 @@ const events: TimelineEvent[] = [
     title: "THE OXYGEN CONSOLIDATION ACT",
     description: "Legislation written by Noxis lawyers grants the corporation exclusive atmospheric processing rights in exchange for 'guaranteed supply stability.' Every breath on Mars now carries a corporate price tag. Opposition legislators who voted against the act experience 'equipment malfunctions' in their personal oxygen supplies within the month. All survive. All change their votes on subsequent legislation.",
     classification: "expanded",
-    image: "/manus-storage/timeline-oxygen-act_7607b98d.png",
+    image: "/assets/timeline-oxygen-act_7607b98d.png",
     category: "political",
   },
   {
@@ -80,7 +80,7 @@ const events: TimelineEvent[] = [
     title: "FIRST CONFIRMED BLACK ROSE KILL",
     description: "Mid-level MCA bureaucrat found dead in sealed apartment. No forced entry. Cause of death: Hollowhead compound. A single synthetic black rose petal on the desk. No motive identified. No demands made. The beginning of something that has no end.",
     classification: "canon",
-    image: "/manus-storage/timeline-blackrose_a82aefb4.png",
+    image: "/assets/timeline-blackrose_a82aefb4.png",
     category: "conflict",
   },
   {
@@ -88,7 +88,7 @@ const events: TimelineEvent[] = [
     title: "THIRD LAZARUS SURGE — THE SILENT WEEK",
     description: "For seven days, every electronic device in Sectors 7 through 12 displays the same symbol — one of the pre-colonial cave markings. No technical explanation found. When the displays return to normal, 23 colonists have vanished. Their apartments are empty. Their ID chips are found arranged in a circle in the sealed pre-colonial cave. The cave's seals are intact.",
     classification: "classified",
-    image: "/manus-storage/timeline-silent-week_315a30b7.png",
+    image: "/assets/timeline-silent-week_315a30b7.png",
     category: "mystery",
   },
   {
@@ -96,7 +96,7 @@ const events: TimelineEvent[] = [
     title: "THE BRAIN HEMORRHAGE — STATIC FORMS",
     description: "67% of MCA junior technical staff vanish over four days. Apartments emptied. ID chips in drainage systems. Work terminals wiped. The government calls it a staffing crisis. In truth, someone is building an army of the colony's most dangerous people: those who understand how everything works.",
     classification: "canon",
-    image: "/manus-storage/timeline-braindrain_ca296f6f.png",
+    image: "/assets/timeline-braindrain_ca296f6f.png",
     category: "conflict",
   },
   {
@@ -104,7 +104,7 @@ const events: TimelineEvent[] = [
     title: "HANDLER WEBB — DEATH AND SIGHTINGS",
     description: "Noxis Handler Marcus Webb officially declared dead. Death certificate filed. Funeral attended by 200 colleagues. Three confirmed sightings in subsequent SOLs — each in a different sector, each by reliable witnesses. MCA refuses to investigate. Noxis refuses to comment.",
     classification: "expanded",
-    image: "/manus-storage/timeline-webb_376a7f78.png",
+    image: "/assets/timeline-webb_376a7f78.png",
     category: "mystery",
   },
   {
@@ -112,7 +112,7 @@ const events: TimelineEvent[] = [
     title: "THE SECTOR 4 BLACKOUT",
     description: "Static operative 'Crash' disables all power systems in Sector 4 for 72 hours. During the blackout, 14 government surveillance archives are physically removed from their facilities. When power returns, the archives are gone. Static broadcasts a single message across all frequencies: 'NOW YOU KNOW WHAT IT FEELS LIKE TO LIVE IN THE DARK.'",
     classification: "expanded",
-    image: "/manus-storage/timeline-blackout_62602b76.png",
+    image: "/assets/timeline-blackout_62602b76.png",
     category: "conflict",
   },
   {
@@ -120,7 +120,7 @@ const events: TimelineEvent[] = [
     title: "THE PURGE",
     description: "MCA initiates emergency data purge across all government servers. Reason: classified. Duration: 3 hours. Estimated data destroyed: 40% of colonial records. What survived was scattered across damaged partitions. This archive is what remains.",
     classification: "canon",
-    image: "/manus-storage/timeline-purge_fccc02a7.png",
+    image: "/assets/timeline-purge_fccc02a7.png",
     category: "collapse",
   },
   {
@@ -128,7 +128,7 @@ const events: TimelineEvent[] = [
     title: "SIGNAL ACQUIRED — PRESENT DAY",
     description: "You are here. The archive is online. The signal is degrading. What you find in these records was never meant to survive. Read carefully. The connection is unstable. And something is still watching the frequencies.",
     classification: "expanded",
-    image: "/manus-storage/timeline-present_3c289fd8.png",
+    image: "/assets/timeline-present_3c289fd8.png",
     category: "collapse",
   },
 ];

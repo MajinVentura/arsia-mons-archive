@@ -132,7 +132,7 @@ export default function Conspiracies() {
         </div>
 
         <div className="relative w-full h-[180px] md:h-[250px] overflow-hidden border border-[var(--blood)]/10 mb-8">
-          <img src="/manus-storage/conspiracy-signal_63a3bd9c.png" alt="Signal Anomaly" className="w-full h-full object-cover opacity-40" />
+          <img src="/assets/conspiracy-signal_63a3bd9c.png" alt="Signal Anomaly" className="w-full h-full object-cover opacity-40" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent" />
           <div className="absolute bottom-3 left-4 flex items-center gap-3">
             <span className="stamp-classified">CLASSIFIED</span>
